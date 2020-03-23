@@ -34,7 +34,7 @@ spec:
         image: giaple/demogo:latest
         ports:
         - containerPort: 8080
---------------
+----
 #namespace
 apiVersion: v1
 kind: Namespace
