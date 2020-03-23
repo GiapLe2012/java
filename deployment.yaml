@@ -1,10 +1,10 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: java-example-service
 spec:
   selector:
-    app: php-example
+    app: java-example
   type: NodePort
   ports:
     - protocol: TCP
@@ -14,26 +14,33 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  # tên của deployment
   name: java-example
-  labels:
-    app: java-example
 spec:
+  # số POD tạo ra
   replicas: 1
+  # thiết lập các POD do deploy quản lý, là POD có nhãn  "app=deployapp"
   selector:
     matchLabels:
       app: java-example
+
+  # Định nghĩa mẫu POD, khi cần Deploy sử dụng mẫu này để tạo Pod
   template:
     metadata:
+      name: podapp-java
       labels:
         app: java-example
     spec:
-      imagePullSecrets:
-      - name: pipeline-docker-registry
       containers:
-      - name: java
+      - name: node
+        #image: ichte/swarmtest:node
         image: giaple/demogo:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
         ports:
-        - containerPort: 8080
+          - containerPort: 8080
 ----
 #namespace
 apiVersion: v1
