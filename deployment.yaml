@@ -41,10 +41,9 @@ spec:
             cpu: "100m"
         ports:
           - containerPort: 8080
-----
+---
 #namespace
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: giaplv-java-app          
----
+  name: giaplv-app-java 
